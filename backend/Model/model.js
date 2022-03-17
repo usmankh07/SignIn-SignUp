@@ -8,8 +8,7 @@ const frontData = new mongoose.Schema({
     },
     name: {
         type: String,   
-        maxlength: 15,
-        minlength: 4
+
     },
     email: {
         type: String,
@@ -44,7 +43,21 @@ const frontData = new mongoose.Schema({
     date: {
         type: Date,
         default: Date.now
-    }
+    },
+    status: {
+        type: String, 
+        enum: ['Pending', 'Active'],
+        default: 'Pending'
+      },
+    confirmationCode: { 
+        type: String, 
+        unique: true },
+    roles: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Role"
+        }
+    ]
 
 })
 

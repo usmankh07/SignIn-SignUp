@@ -26,6 +26,11 @@ const userData = async  (req, res) => {
     .catch(err => console.log(err))
 }
 
+if (user.status != "Active") {
+      res.status(401).send({
+      message: "Pending Account. Please Verify Your Email!",
+    });
+  }
 const login = async (req, res) => {
     try {
         const { email, password } = req.body
@@ -37,7 +42,7 @@ const login = async (req, res) => {
         if (userlogin) {
             const token = jwt.sign(
                 {
-                    name: req.body.name,
+                    password: req.body.password,
                     email: req.body.email,
 
                  },   
